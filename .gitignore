@@ -1,0 +1,11 @@
+
+# file edition
+\#*
+*~
+.*.swp
+
+# python cache
+*.pyc
+
+# environment
+env/
