@@ -9,7 +9,7 @@
 #     `#$$$##################@`                                                #
 #     #$##^$################$#$       main.py                                  #
 #    #$#<--->@#######$##########.                                              #
-#    ####$v####.        `####$ #.     By: cdivry <>                            #
+#    ####$v####.        `####$ #.     By: cdivry <cdivry@student.42.fr>        #
 #    ####$####$`        .###  .                                                #
 #     .########################                                                #
 #      .$#$###################.                                                #
@@ -20,18 +20,26 @@
 #                   ##$.                                                       #
 #  **************************************************************************  #
 
+import sys
 import mne
 import numpy
 import time
+
+def usage():
+    print("USAGE: python " + sys.argv[0] + " <dataset.edf>")
+
+def check_args():
+    if len(sys.argv) != 2:
+        usage()
+        exit()
 
 def read_dataset(filename):
     raw = mne.io.read_raw_edf(filename, preload=True)
     raw.set_eeg_reference('average', projection=True)  # set EEG average reference
     raw.plot(block=True, lowpass=40)
-    time.sleep(5)
 
 
 if __name__ == '__main__':
-
-    filename = u'dataset/test_eeg.edf'
-    read_dataset('dataset/test_eeg.edf')
+    check_args()
+    filename = sys.argv[1]
+    read_dataset(filename)
